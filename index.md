@@ -20,5 +20,7 @@ List education
 ## Projects
 List projects
 
+Check out my [blog](blog/blog.html), there will be more published soon!
+
 ## Shout-out
 Huge thanks to [Oskar Wickström](https://x.com/owickstrom) for their [article](https://owickstrom.github.io/the-monospace-web/) and template of which this website is built from.
