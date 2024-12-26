@@ -4,7 +4,7 @@ subtitle: Embedded Software Engineer
 version: v0.0.1
 email: rwardd@outlook.com.au
 linkedin: "https://www.linkedin.com/in/rwardd/"
-resume: https://nbviewer.org/github/rwardd/rwardd.github.io/blob/main/badResumePleaseUpdate.pdf
+resume: https://nbviewer.org/github/rwardd/rwardd.github.io/blob/main/resume.pdf
 github: https://github.com/rwardd
 ---
 
