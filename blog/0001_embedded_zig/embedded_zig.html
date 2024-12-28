@@ -12,7 +12,7 @@
 <nav id="TOC" role="doc-toc">
 </nav>
 <h1 id="embedded-zig">Embedded Zig</h1>
-<p>Ryan Ward, 2024</p>
+<p>Ryan Ward, December 2024</p>
 <h2 id="purpose">Purpose</h2>
 <p>The <a href="https://ziglang.org/">Zig</a> language has been rising
 in popularity over the last few years, with many hailing it as a
@@ -77,15 +77,15 @@ labeled as <code>uart</code>):</p>
         compatible = &quot;ns16550a&quot;;
     };</code></pre>
 <p>We can see that the compatible chip is <code>ns16550a</code>, which
-matches with the <a
+matches with the QEMU <a
 href="https://www.qemu.org/docs/master/system/riscv/virt.html">online
 documentation</a> Looking at <a
 href="http://www.elektronikjk.com/elementy_czynne/IC/NS16550A.pdf">the
-documentation</a>, particularly the Summary of Registers on page 14, the
-Transmitter Holding Register is located at address 000 (zero offset from
-address 0x10000000, which is why we can write the data bytes directly to
-the UART device address). QEMU handles the initialisation of the serial
-device for us.</p>
+documentation</a> for the UART chip, particularly the Summary of
+Registers on page 14, the Transmitter Holding Register is located at
+address 000 (zero offset from address 0x10000000, which is why we can
+write the data bytes directly to the UART device address). QEMU handles
+the initialisation of the serial device for us.</p>
 <h2 id="the-initialisation">The initialisation</h2>
 <p>We need to define a memory layout so that our program can be linked
 together and an <code>elf</code> executable can be created. Create a
@@ -246,14 +246,18 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello,</span> World!</span></code></pre></div>
 <p>Note, to exit QEMU, press <code>Ctrl-A</code>, then
 <code>x</code>.</p>
-<h2 id="final-thoughts">Final thoughts</h2>
+<h2 id="wrap-it-up">Wrap it up</h2>
 <p>Yes, I know, this fun activity had just as much QEMU + RISC-V content
 as it did Zig, a lesson I quickly learned when initially writing the
 code. Nonetheless, it gives a nice overview of using Zig in a
 freestanding/embedded context. All the code in this post can be found on
 <a
-href="https://github.com/rwardd/rwardd.github.io/tree/main/blog/0001_embedded_zig">my
-GitHub</a>.</p>
+href="https://github.com/rwardd/rwardd.github.io/tree/main/blog/0001_embedded_zig/demo">my
+GitHub</a>. A keen eye would’ve noticed that the build script also
+included debugging options for QEMU, however, I’ll leave the debugging
+process for another post. Any questions, feel free to send me an email
+(rwardd@outlook.com.au) or <a href="https://x.com/crank1_">message me on
+x dot com</a>.</p>
   <div class="debug-grid"></div>
   <script src="index.js"></script>
 </body>
