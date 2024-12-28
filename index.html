@@ -16,7 +16,7 @@
       <span class="subtitle">Embedded Software Engineer</span>
     </td>
     <th>Version</th>
-    <td class="width-min">v0.0.1</td>
+    <td class="width-min">v1.0.0</td>
   </tr>
   <tr>
     <th>Location</th>
@@ -33,8 +33,11 @@
 <ul class="incremental">
 <li><a href="#about-me" id="toc-about-me">About Me</a></li>
 <li><a href="#experience" id="toc-experience">Experience</a></li>
+<li><a href="#skills" id="toc-skills">Skills</a></li>
 <li><a href="#education" id="toc-education">Education</a></li>
 <li><a href="#projects" id="toc-projects">Projects</a></li>
+<li><a href="#open-source-contributions"
+id="toc-open-source-contributions">Open Source Contributions</a></li>
 <li><a href="#shout-out" id="toc-shout-out">Shout-out</a></li>
 </ul>
 </nav>
@@ -42,12 +45,28 @@
 <p>I am a 23 year old software/electronics/computer engineer. I have a
 formal education in electrical and computer engineering, however, most
 of my professional experience has consisted of writing firmware,
-software and gateware for a variety of applications.</p>
+software and gateware for a variety of applications. I am passionate
+about embedded programming, electronics, and wherever software interacts
+with hardware.</p>
+<p>In addition, I have been involved with a lot of hardware verification
+and testing, including bringing up new PCBs, porting firmware drivers to
+new platforms and architectures, and debugging RF circuits. I have a
+strong understanding of embedded programming, integrated circuit
+operation, high-speed data protocols, radio frequency design &amp;
+implementation, and design processes for complex projects, both in the
+software and hardware domain.</p>
+<p>Outside of work hours, I spend my time working on some fun <a
+href="#projects">side projects</a>, and I will try to start writing
+about interesting topics in my <a href="blog/blog.html">blog</a>. I
+enjoy working on projects that improve my knowledge and skillset,
+examples include booting Linux on a softcore RISC-V processor,
+experimenting around with my HackRF PortaPack, learning Zig, writing a
+low-level operating system, and the list goes on.</p>
 <p>I love computers and their history - humanity’s progression from
 vacuum tubes to RTX 4090’s will always be something that fascinates me.
 Discovering historical and influential figures in the computing world is
-something I enjoy, and I really admire the likes of Ritchie, Thompson,
-Knuth, Lattner, Stallman, Torvalds and Hotz to name a few.</p>
+something I enjoy, and I admire the likes of Ritchie, Thompson, Knuth,
+Lattner, Stallman, Torvalds and Hotz to name a few.</p>
 <h2 id="experience">Experience</h2>
 <ul class="incremental">
 <li><strong>Praetorian Aeronautics (2025 - current)</strong>
@@ -59,7 +78,10 @@ Knuth, Lattner, Stallman, Torvalds and Hotz to name a few.</p>
 <li><strong>Boeing Defence Australia (2023 - 2025)</strong>
 <ul class="incremental">
 <li>Implemented firmware on STM32 targets on a FreeRTOS platform</li>
-<li>Wrote and integrated custom IC drivers</li>
+<li>Wrote and integrated custom IC drivers, increasing usability for
+internal customers</li>
+<li>Collaborated with teams of engineers across domains to deliver
+projects on schedule</li>
 <li>Debugging firmware (GDB is awesome)</li>
 <li>PCBA/CCA verification</li>
 <li>Custom IP core development in VHDL</li>
@@ -81,9 +103,22 @@ Knuth, Lattner, Stallman, Torvalds and Hotz to name a few.</p>
 <li>Casual software development</li>
 </ul></li>
 </ul>
+<h2 id="skills">Skills</h2>
+<ul class="incremental">
+<li>Languages: C, Python, VHDL, C++, RISC-V &amp; AArch64 ASM, Matlab,
+Tcl, Zig, Verilog</li>
+<li>Development Tools: Git, GDB, Vivado, Vitis, Yosys suite</li>
+<li>Platforms &amp; Frameworks: Yocto, Buildroot, Zephyr, FreeRTOS</li>
+<li>Hardware: STM32 microcontrollers, Raspberry Pi Pico, ESP32, Lattice
+FPGAs (ECP5), Xilinx FPGAs (Zynq7000, Zynq Ultrascale), various RF
+integrated circuits</li>
+<li>Test equipment: Oscilloscopes, Vector Network Analysers, Spectrum
+Analysers, Frequency Counters, PassMark</li>
+<li>Protocols: SPI, IIC, I2S, USB (2 &amp; 3), USB-PD, DDR</li>
+</ul>
 <h2 id="education">Education</h2>
 <p>I hold a Bachelor’s (Honours) and Master’s degree of Electrical and
-Computer Engineering from the University of Queensland.</p>
+Computer Engineering from the University of Queensland, Australia.</p>
 <h2 id="projects">Projects</h2>
 <dl class="incremental">
 <dt><strong>Zip RTOS</strong></dt>
@@ -97,11 +132,22 @@ lot of work.
 </dd>
 <dd>
 So far, I have written a super basic task scheduler that will
-round-robin schedule an arbitrary number of tasks.
+round-robin schedule an arbitrary number of tasks. I have spent most of
+my time understanding the RISC-V architecture and how different
+operating systems implement their context switching mechanisms rather
+than actually writing and learning Zig :D
+</dd>
+<dt><strong>Pico Mesh</strong></dt>
+<dd>
+A LoRa based mesh network that allows Raspberry Pi Pico modules to
+communicate with one another. Built on top of Zephyr RTOS, running on
+the RP2040 with a Semtech SX1276 LoRa module and a ST7789 OLED display.
 </dd>
 </dl>
-<p>Check out my <a href="blog/blog.html">blog</a>, there will be more
-published soon!</p>
+<h2 id="open-source-contributions">Open Source Contributions</h2>
+<p>I have contributed code to the FreeRTOS-Kernel and STM32 USB-PD Core
+repositories. I would love to fill this section out more as my skills
+progress.</p>
 <h2 id="shout-out">Shout-out</h2>
 <p>Huge thanks to <a href="https://x.com/owickstrom">Oskar Wickström</a>
 for their <a

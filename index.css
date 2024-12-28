@@ -228,6 +228,12 @@ details :last-child {
 }
 
 pre {
+  position: relative;
+  margin: 5px 0 ;
+  padding: 1.75rem 0 1.75rem 1rem;
+
+}
+pre {
   white-space: pre;
   overflow-x: auto;
   margin: var(--line-height) 0;
@@ -239,10 +245,12 @@ figure pre {
 
 pre, code {
   font-family: var(--font-family);
+  background: var(--background-color-alt);
 }
 
 code {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-color-alt)
 }
 
 figure {
