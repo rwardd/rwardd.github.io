@@ -2,6 +2,8 @@
 title: Embedded Zig 
 ---
 # Embedded Zig
+[Home](../../index.html) [Blog Index](../blog.html)
+
 Ryan Ward, December 2024
 
 ## Purpose
