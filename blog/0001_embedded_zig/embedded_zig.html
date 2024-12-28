@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Embedded Zig</title>
+  <link rel="stylesheet" href="../../reset.css" />
+  <link rel="stylesheet" href="../../index.css" />
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+</nav>
+<h1 id="embedded-zig">Embedded Zig</h1>
+<p>Ryan Ward, 2024</p>
+<h2 id="purpose">Purpose</h2>
+<p>The <a href="https://ziglang.org/">Zig</a> language has been rising
+in popularity over the last few years, with many hailing it as a
+“replacement for C”. I am a huge C fan, and wanted to see what a
+replacement would look like, especially in the context of embedded
+freestanding systems. I set out to create a simple task scheduler, that
+I eventually want to build out to a basic real time operating system
+(RTOS).</p>
+<p>This short post will outline the basics of getting a “Hello World”
+example up and running on a virtual 32-bit RISC-V processor.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Install QEMU’s riscv32 emulator using (for Arch Linux):</p>
+<pre><code>sudo pacman -S qemu-system-riscv</code></pre>
+<p>To install Zig, follow the <a
+href="https://ziglang.org/learn/getting-started/">instructions
+provided</a>.</p>
+<h2 id="some-zig-code">Some Zig code</h2>
+<p>Once we have specified a build script, let’s create the entrypoint to
+our baremetal program. First, create a <code>src</code> directory and in
+it, a <code>main.zig</code> file.</p>
+<pre><code>mkdir src &amp;&amp; cd src &amp;&amp; touch main.zig</code></pre>
+<p>In your favourite editor, open the <code>main.zig</code> file and
+populate it with the following:</p>
+<pre><code>fn print(message: []const u8) void {
+    // The uart data register for the QEMU virt platform is at address 0x10000000
+    const uart_register_address: usize = 0x10000000;
+
+    // Set the uart data out to the above address
+    const uart_data_out: *u8 = @ptrFromInt(uart_register_address);
+
+    // Iterate through the given slice, and set the data out to the current character
+    for (message) |character| {
+        uart_data_out.* = character;
+    }
+}
+
+// Export the Zig entry point so the symbol exists in assembly land
+export fn start() noreturn {
+    print(&quot;Hello, World!\n&quot;);
+    while (true) {}
+}</code></pre>
+<p>This is a very simple program that will print the message “Hello,
+World!” to the terminal before infinitely looping. The message is
+printed using QEMU’s virtual UART device. This address can be found by
+dumping the <code>devicetree</code> and using the <code>dtc</code> tool
+to reconstruct the <code>devicetree</code>:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure `dtc` is installed</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pacman <span class="at">-S</span> dtc</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">qemu-system-riscv32</span> <span class="at">-machine</span> virt <span class="at">-machine</span> dumpdtb=rv32virt.dtb</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">dtc</span> <span class="at">-I</span> dtb <span class="at">-O</span> dts <span class="at">-o</span> rv32virt.dts rv32virt.dtb</span></code></pre></div>
+<p>After opening <code>rv32virt.dts</code> in a text editor, we can
+search for the <code>serial</code> keyword (I have no idea why it’s
+labeled as <code>serial</code> in the <code>.dts</code> file and not
+<code>uart</code>, whereas other resources clearly show the device
+labeled as <code>uart</code>):</p>
+<pre class="dts"><code>serial@10000000 {
+        interrupts = &lt;0x0a&gt;;
+        interrupt-parent = &lt;0x03&gt;;
+        clock-frequency = &quot;&quot;, &quot;8@&quot;;
+        reg = &lt;0x00 0x10000000 0x00 0x100&gt;;
+        compatible = &quot;ns16550a&quot;;
+    };</code></pre>
+<p>We can see that the compatible chip is <code>ns16550a</code>, which
+matches with the <a
+href="https://www.qemu.org/docs/master/system/riscv/virt.html">online
+documentation</a> Looking at <a
+href="http://www.elektronikjk.com/elementy_czynne/IC/NS16550A.pdf">the
+documentation</a>, particularly the Summary of Registers on page 14, the
+Transmitter Holding Register is located at address 000 (zero offset from
+address 0x10000000, which is why we can write the data bytes directly to
+the UART device address). QEMU handles the initialisation of the serial
+device for us.</p>
+<h2 id="the-initialisation">The initialisation</h2>
+<p>We need to define a memory layout so that our program can be linked
+together and an <code>elf</code> executable can be created. Create a
+file in the <code>src</code> directory called <code>link.ld</code> with
+the following contents:</p>
+<pre class="ld"><code>OUTPUT_ARCH(&quot;riscv&quot;)
+ENTRY(_start)
+
+/* From the QEMU devicetree dump, we can see that the memory starts at address 0x8000000 */
+BASE_ADDRESS = 0x80000000;
+
+MEMORY
+{
+    /* We can really have any amount of memory we want, the maximum being 0x1000000 bytes */
+    ram (rwxa): ORIGIN = BASE_ADDRESS, LENGTH = 128M
+}
+
+SECTIONS
+{
+    . = BASE_ADDRESS;
+    .text : ALIGN(4K) {
+        *(.init);
+        *(.text);
+    }
+
+    .rodata : ALIGN(4K) {
+        *(.rodata);
+    }
+
+    .data : ALIGN(4K) {
+        *(.data);
+    }
+
+    .bss : ALIGN(4K) {
+        *(.bss);
+    }
+
+    /* Export some bss and stack symbols for our startup procedure */
+    PROVIDE(_bss_start = ADDR(.bss));
+    PROVIDE(_bss_end = _bss_start + SIZEOF(.bss));
+    PROVIDE(_stack_top = _bss_end + 0x1000);
+}
+</code></pre>
+<p>For the (virtual) CPU to actually know what to with our program, we
+first have to set up a stack pointer. In the <code>src</code> directory,
+create a file named <code>init.S</code>, with the following
+contents:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>.<span class="bu">section</span> <span class="op">.</span>init</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>.global _start</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>// <span class="bu">Entry</span> point</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">_start:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    la      <span class="kw">sp</span><span class="op">,</span> _stack_top</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    la      a1<span class="op">,</span> _bss_start</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    la      a2<span class="op">,</span> _bss_end</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>// <span class="cf">Loop</span> <span class="op">and</span> clear the bss section</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">clear_bss:</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    sw      zero<span class="op">,</span> <span class="op">(</span>a2<span class="op">)</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    addi    a1<span class="op">,</span> a1<span class="op">,</span> <span class="dv">4</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    bltu    a1<span class="op">,</span> a2<span class="op">,</span> clear_bss</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">entrypoint:</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    tail  start</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>// Endless loop</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="fu">wait_interrupt:</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    wfi</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    j wait_interrupt </span></code></pre></div>
+<p>This is a very simple and standard initialisation procedure. You will
+notice that it is loading in the valued of <code>_stack_top</code>,
+<code>_bss_start</code> and <code>_bss_end</code> (all of which are
+memory addresses), clearing the <code>bss</code> section by setting all
+bits to 0, then jumping to the previously exported <code>start</code>
+symbol in our <code>main.zig</code> file.</p>
+<h2 id="the-build-script">The build script</h2>
+<p>The standard Zig build system has a central <code>build.zig</code>
+file that outlines the build process for the code base. In our case, we
+will construct a very simple build script. The blob below shows the
+build script used:</p>
+<pre class="zig"><code>// Import the standard library and define some commonly used types
+const std = @import(&quot;std&quot;);
+const CrossTarget = std.zig.CrossTarget;
+const Target = std.Target;
+const Feature = std.Target.Cpu.Feature;
+
+pub fn build(b: *std.Build) void {
+    // Give an option to run QEMU in GDB server mode
+    const debug = b.option(bool, &quot;debug&quot;, &quot;Run qemu in debug mode&quot;) orelse false;
+
+    // Define a target CPU
+    const target = std.Target.Query{
+        // Our target is the RISC-V 32-bit architecture
+        .cpu_arch = Target.Cpu.Arch.riscv32,
+
+        // There will be no operating system running on the target, therefore it is freestanding
+        .os_tag = Target.Os.Tag.freestanding,
+
+        // There is no ABI defined on our target, as it is baremetal (no C standard libraries)
+        .abi = Target.Abi.none,
+
+        // The chosen model is just a baseline RISC-V 32 processor, however, it could be any valid
+        // target model (e.g., a SiFive E20)
+        .cpu_model = .{ .explicit = &amp;std.Target.riscv.cpu.baseline_rv32 },
+    };
+
+    // Specify the entrypoint of our program
+    const exe = b.addExecutable(.{
+        // Fetch our target platform
+        .target = b.resolveTargetQuery(target),
+
+        // The name of our final executable
+        .name = &quot;main&quot;,
+
+        // The entrypoint of our program
+        .root_source_file = b.path(&quot;src/main.zig&quot;),
+    });
+
+    exe.addAssemblyFile(b.path(&quot;src/init.S&quot;));
+    exe.setLinkerScriptPath(b.path(&quot;src/link.ld&quot;));
+    b.installArtifact(exe);
+
+    // Standard QEMU arguments for a RISC-V virt machine
+    const qemu_args = .{
+        &quot;qemu-system-riscv32&quot;,
+        &quot;-machine&quot;,
+        &quot;virt&quot;,
+        &quot;-bios&quot;,
+        &quot;none&quot;,
+        &quot;-kernel&quot;,
+        &quot;zig-out/bin/main&quot;,
+        &quot;-nographic&quot;,
+    };
+
+    const qemu = b.addSystemCommand(&amp;qemu_args);
+
+    // If the debug flag was specified above, add the debug args
+    if (debug) {
+        qemu.addArg(&quot;-s&quot;);
+        qemu.addArg(&quot;-S&quot;);
+    }
+
+    // Ensure the QEMU step depends on the executable being built
+    qemu.step.dependOn(b.default_step);
+
+    // Allows us to execute `zig build run` to build &amp; run the executable
+    const run_step = b.step(&quot;run&quot;, &quot;Start qemu&quot;);
+    run_step.dependOn(&amp;qemu.step);
+}</code></pre>
+<h2 id="run-it">Run it</h2>
+<p>With everything together, we should be now able to run the following
+from our working directory:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">zig</span> build run</span></code></pre></div>
+<p>With the output:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello,</span> World!</span></code></pre></div>
+<p>Note, to exit QEMU, press <code>Ctrl-A</code>, then
+<code>x</code>.</p>
+<h2 id="final-thoughts">Final thoughts</h2>
+<p>Yes, I know, this fun activity had just as much QEMU + RISC-V content
+as it did Zig, a lesson I quickly learned when initially writing the
+code. Nonetheless, it gives a nice overview of using Zig in a
+freestanding/embedded context. All the code in this post can be found on
+<a
+href="https://github.com/rwardd/rwardd.github.io/tree/main/blog/0001_embedded_zig">my
+GitHub</a>.</p>
+  <div class="debug-grid"></div>
+  <script src="index.js"></script>
+</body>
+</html>
