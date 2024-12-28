@@ -246,6 +246,6 @@ Note, to exit QEMU, press `Ctrl-A`, then `x`.
 ## Wrap it up
 Yes, I know, this fun activity had just as much QEMU + RISC-V content as it did Zig, a lesson I quickly
 learned when initially writing the code. Nonetheless, it gives a nice overview of using Zig in a freestanding/embedded context.
-All the code in this post can be found on [my GitHub](https://github.com/rwardd/rwardd.github.io/tree/main/blog/0001_embedded_zig).
+All the code in this post can be found on [my GitHub](https://github.com/rwardd/rwardd.github.io/tree/main/blog/0001_embedded_zig/demo).
 A keen eye would've noticed that the build script also included debugging options for QEMU, however, I'll leave the debugging process
 for another post. Any questions, feel free to send me an email (rwardd@outlook.com.au) or [message me on x dot com](https://x.com/crank1_).
