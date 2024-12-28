@@ -118,3 +118,5 @@ function onDebugToggle() {
 }
 debugToggle.addEventListener("change", onDebugToggle);
 onDebugToggle();
+
+
