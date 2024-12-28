@@ -6,6 +6,7 @@ email: rwardd@outlook.com.au
 linkedin: "https://www.linkedin.com/in/rwardd/"
 resume: https://nbviewer.org/github/rwardd/rwardd.github.io/blob/main/resume.pdf
 github: https://github.com/rwardd
+blog: https://ryanward.tech/blog/blog.html
 ---
 
 ## About Me
@@ -14,7 +15,7 @@ and computer engineering, however, most of my professional experience has consis
 software and gateware for a variety of applications. I am passionate about embedded programming, electronics, and
 wherever software interacts with hardware.
 
-In addition, I have been involved with a lot of
+In addition to writing software, I have been involved with a lot of
 hardware verification and testing, including bringing up new PCBs, porting firmware drivers to new platforms and architectures,
 and debugging RF circuits. I have a strong understanding of embedded programming, integrated circuit operation, high-speed data protocols, radio frequency design & implementation, and
 design processes for complex projects, both in the software and hardware domain.
@@ -22,7 +23,7 @@ design processes for complex projects, both in the software and hardware domain.
 Outside of work hours, I spend my time working on some fun [side projects](#projects), and I will try to start
 writing about interesting topics in my [blog](blog/blog.html). I enjoy working on projects that improve my knowledge and skillset, 
 examples include booting Linux on a softcore RISC-V processor, experimenting around with my HackRF 
-PortaPack, learning Zig, writing a low-level operating system, and the list goes on.
+PortaPack, learning Zig, writing a low-level operating system, the list goes on.
 
 I love computers and their history - humanity's
 progression from vacuum tubes to RTX 4090's will always be something that fascinates me. Discovering 
