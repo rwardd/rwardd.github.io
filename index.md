@@ -3,7 +3,7 @@ title: Ryan Ward
 subtitle: Embedded Software Engineer
 version: v1.0.0
 email: rwardd@outlook.com.au
-linkedin: "https://www.linkedin.com/in/rwardd/"
+linkedin: https://www.linkedin.com/in/rwardd/
 resume: https://nbviewer.org/github/rwardd/rwardd.github.io/blob/main/resume.pdf
 github: https://github.com/rwardd
 blog: https://ryanward.tech/blog/blog.html
@@ -48,6 +48,9 @@ Ritchie, Thompson, Knuth, Lattner, Stallman, Torvalds and Hotz to name a few.
 <p></p>
 * **University of Queensland (2022 - 2023)**
     - Developed a decentralised application for event ticketing
+    - Co-authoured a research article published by Springer in the book [Blockchain and Smart Contract Technologies for Innovative Applications](https://link.springer.com/chapter/10.1007/978-3-031-50028-2_7#auth-Ryan-Ward)
+    - Designed and implemented a proof of concept ticketing system, deployed on an Ethereum testnet
+    - The application won the award "Best Blockchain Project" at the UQ Innovation Showcase in 2022
 <p></p>
 * **Various Startups (2021 - 2022)**
     - Casual software development
