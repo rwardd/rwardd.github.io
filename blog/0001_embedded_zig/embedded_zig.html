@@ -79,9 +79,9 @@ labeled as <code>uart</code>):</p>
         compatible = &quot;ns16550a&quot;;
     };</code></pre>
 <p>We can see that the compatible chip is <code>ns16550a</code>, which
-matches with the QEMU <a
+matches with the <a
 href="https://www.qemu.org/docs/master/system/riscv/virt.html">online
-documentation</a> Looking at <a
+documentation</a> for QEMU. Looking at <a
 href="http://www.elektronikjk.com/elementy_czynne/IC/NS16550A.pdf">the
 documentation</a> for the UART chip, particularly the Summary of
 Registers on page 14, the Transmitter Holding Register is located at
@@ -157,7 +157,7 @@ class="sourceCode asm"><code class="sourceCode fasm"><span id="cb7-1"><a href="#
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>// Endless loop</span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="fu">wait_interrupt:</span></span>
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    wfi</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    j wait_interrupt </span></code></pre></div>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    j wait_interrupt</span></code></pre></div>
 <p>This is a very simple and standard initialisation procedure. You will
 notice that it is loading in the valued of <code>_stack_top</code>,
 <code>_bss_start</code> and <code>_bss_end</code> (all of which are
