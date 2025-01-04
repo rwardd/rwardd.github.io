@@ -1,5 +1,5 @@
 ---
-title: Embedded Zig 
+title: Embedded Zig
 ---
 # Embedded Zig
 [Home](../../index.html) [Blog Index](../blog.html)
@@ -7,12 +7,12 @@ title: Embedded Zig
 Ryan Ward, December 2024
 
 ## Purpose
-The [Zig](https://ziglang.org/) language has been rising in popularity over the last few years, with 
-many hailing it as a "replacement for C". I am a huge C fan, and wanted to see what a replacement 
-would look like, especially in the context of embedded freestanding systems. I set out to create a 
+The [Zig](https://ziglang.org/) language has been rising in popularity over the last few years, with
+many hailing it as a "replacement for C". I am a huge C fan, and wanted to see what a replacement
+would look like, especially in the context of embedded freestanding systems. I set out to create a
 simple task scheduler, that I eventually want to build out to a basic real time operating system (RTOS).
 
-This short post will outline the basics of getting a "Hello World" example up and running on a 
+This short post will outline the basics of getting a "Hello World" example up and running on a
 virtual 32-bit RISC-V processor.
 
 ## Prerequisites
@@ -63,7 +63,7 @@ dtc -I dtb -O dts -o rv32virt.dts rv32virt.dtb
 ```
 
 After opening `rv32virt.dts` in a text editor, we can search for the `serial` keyword (I have no idea
-why it's labeled as `serial` in the `.dts` file and not `uart`, whereas other resources clearly show 
+why it's labeled as `serial` in the `.dts` file and not `uart`, whereas other resources clearly show
 the device labeled as `uart`):
 
 ```dts
@@ -75,9 +75,9 @@ serial@10000000 {
 		compatible = "ns16550a";
 	};
 ```
-We can see that the compatible chip is `ns16550a`, which matches with the QEMU [online documentation](https://www.qemu.org/docs/master/system/riscv/virt.html)
-Looking at [the documentation](http://www.elektronikjk.com/elementy_czynne/IC/NS16550A.pdf) for the UART chip, particularly the Summary of Registers on page 14, the Transmitter Holding Register is located 
-at address 000 (zero offset from address 0x10000000, which is why we can write the data bytes directly to the UART device address). QEMU handles the initialisation of the 
+We can see that the compatible chip is `ns16550a`, which matches with the [online documentation](https://www.qemu.org/docs/master/system/riscv/virt.html) for QEMU.
+Looking at [the documentation](http://www.elektronikjk.com/elementy_czynne/IC/NS16550A.pdf) for the UART chip, particularly the Summary of Registers on page 14, the Transmitter Holding Register is located
+at address 000 (zero offset from address 0x10000000, which is why we can write the data bytes directly to the UART device address). QEMU handles the initialisation of the
 serial device for us.
 
 ## The initialisation
@@ -149,17 +149,17 @@ entrypoint:
 // Endless loop
 wait_interrupt:
     wfi
-    j wait_interrupt 
+    j wait_interrupt
 
 ```
 
 This is a very simple and standard initialisation procedure. You will notice that it is loading in the
-valued of `_stack_top`, `_bss_start` and `_bss_end` (all of which are memory addresses), clearing the `bss` section by 
+valued of `_stack_top`, `_bss_start` and `_bss_end` (all of which are memory addresses), clearing the `bss` section by
 setting all bits to 0, then jumping to the previously exported `start` symbol in our `main.zig` file.
 
 ## The build script
-The standard Zig build system has a central `build.zig` file that outlines the build process for the 
-code base. In our case, we will construct a very simple build script. 
+The standard Zig build system has a central `build.zig` file that outlines the build process for the
+code base. In our case, we will construct a very simple build script.
 The blob below shows the build script used:
 
 ```zig
