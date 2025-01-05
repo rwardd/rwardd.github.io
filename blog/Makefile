@@ -1,6 +1,6 @@
 all: writings blog.html
 
-SOURCES=./0001_embedded_zig/embedded_zig.md
+SOURCES=./0001_embedded_zig/embedded_zig.md ./0002_zig_on_hardware/zig_on_hardware.md
 OBJS=$(SOURCES:.md=.html)
 
 writings: $(OBJS)
