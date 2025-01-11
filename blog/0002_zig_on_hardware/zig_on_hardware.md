@@ -11,7 +11,7 @@ In my [previous post](../0001_embedded_zig/embedded_zig.html), we set up a very 
 Zig program running on an emulated RISC-V processor. Whilst I used the term 'baremetal' in the previous
 post, I would not count running a program inside an emulator on a host OS close to the hardware at all.
 So, lets run our Zig program on some actual RISC-V hardware! I don't have a SiFive or RP2350 CPU
-at my immediate disposable, but I do have a Lattice ECP5 FPGA sitting on top of an [icesugar-pro](https://github.com/wuxx/icesugar-pro) development
+at my immediate disposal, but I do have a Lattice ECP5 FPGA sitting on top of an [icesugar-pro](https://github.com/wuxx/icesugar-pro) development
 board. If you didn't already know, the RISC-V specification is an open standard instruction set architecture,
 meaning that anyone can implement their own custom CPUs or SoCs! This is incredible, and whilst it is
 still early days, I really hope to see it progress in the next few years, to the point where it becomes
