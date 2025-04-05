@@ -32,11 +32,16 @@ Ritchie, Thompson, Knuth, Lattner, Stallman, Torvalds and Hotz to name a few.
 
 ## Experience
 * **Praetorian Aeronautics (2025 - current)**
-    - Yet to start
+    - Hardware integration of many avionics and sensor components
+    - Flight controller commissioning and configuration
+    - Building a secure and robust command and control system
+    - Developed a multi-agent reinforcement learning simulation animation frontend
+    - Setting up company-wide development infrastructure
 <p></p>
 * **Boeing Defence Australia (2023 - 2025)**
     - Implemented firmware on STM32 targets on a FreeRTOS platform
     - Wrote and integrated custom IC drivers, increasing usability for internal customers
+    - Embedded Linux development and configuration using Yocto and Buildroot
     - Collaborated with teams of engineers across domains to deliver projects on schedule
     - Debugging firmware (GDB is awesome)
     - PCBA/CCA verification
