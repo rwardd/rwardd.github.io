@@ -1,7 +1,7 @@
 ---
 title: Ryan Ward
 subtitle: Embedded Software Engineer
-version: v1.0.0
+version: v2.0.0
 email: rwardd@outlook.com.au
 linkedin: https://www.linkedin.com/in/rwardd/
 resume: https://nbviewer.org/github/rwardd/rwardd.github.io/blob/main/resume.pdf
@@ -10,19 +10,20 @@ blog: https://ryanward.tech/blog/blog.html
 ---
 
 ## About Me
-I am a 23 year old software/electronics/computer engineer. I have a formal education in electrical 
+I am a passionate software/electronics/computer engineer. I have a formal education in electrical 
 and computer engineering, however, most of my professional experience has consisted of writing firmware,
-software and gateware for a variety of applications. I am passionate about embedded programming, electronics, and
-wherever software interacts with hardware.
+software and gateware for a variety of applications. I am passionate about distributed systems,
+embedded programming, electronics, and wherever software interacts with hardware.
 
 In addition to writing software, I have been involved with a lot of
-hardware verification and testing, including bringing up new PCBs, porting firmware drivers to new platforms and architectures,
-and debugging RF circuits. I have a strong understanding of embedded programming, integrated circuit operation, high-speed data protocols, radio frequency design & implementation, and
-design processes for complex projects, both in the software and hardware domain.
+hardware verification and testing, including bringing up new PCBs, porting firmware drivers to new platforms and
+architectures, and debugging RF circuits. I have a strong understanding of embedded programming, integrated circuit
+operation, high-speed data protocols, radio frequency design & implementation, and design processes for complex
+projects, both in the software and hardware domain.
 
 Outside of work hours, I spend my time working on some fun [side projects](#projects), and I will try to start
-writing about interesting topics in my [blog](blog/blog.html). I enjoy working on projects that improve my knowledge and skillset, 
-examples include booting Linux on a softcore RISC-V processor, experimenting around with my HackRF 
+writing about interesting topics in my [blog](blog/blog.html). I enjoy working on projects that improve my knowledge
+and skillset, examples include booting Linux on a softcore RISC-V processor, experimenting around with my HackRF
 PortaPack, learning Zig, writing a low-level operating system, the list goes on.
 
 I love computers and their history - humanity's
@@ -32,18 +33,27 @@ Ritchie, Thompson, Knuth, Lattner, Stallman, Torvalds and Hotz to name a few.
 
 ## Experience
 * **Praetorian Aeronautics (2025 - current)**
+    - Architecting and implementing a distributed command & control system for autonomous effectors
+    - Designing a onboard cross-language C2 layer connecting advanced computer vision algorithms to flight controller
+      firmware
+    - Developing a sub-millisecond operator "action-to-launch" pipeline
+    - Utilising asynchronous Rust and NixOS
     - Hardware integration of many avionics and sensor components
-    - Flight controller commissioning and configuration
-    - Building a secure and robust command and control system
+    - Debugging flight controller firmware on an STM32 platform
     - Developed a multi-agent reinforcement learning simulation animation frontend
-    - Setting up company-wide development infrastructure
+    - Configuring and maintaining company-wide development infrastructure including:
+        * Gitlab server
+        * CI/CD Runners
+        * Internal documentation (mdbook)
+        * Cloudflare WARP routing
+        * Other internal tooling
 <p></p>
 * **Boeing Defence Australia (2023 - 2025)**
     - Implemented firmware on STM32 targets on a FreeRTOS platform
     - Wrote and integrated custom IC drivers, increasing usability for internal customers
     - Embedded Linux development and configuration using Yocto and Buildroot
     - Collaborated with teams of engineers across domains to deliver projects on schedule
-    - Debugging firmware (GDB is awesome)
+    - Debugging firmware and hardware
     - PCBA/CCA verification
     - Custom IP core development in VHDL
     - HDL development targeting the Zynq7000 SoC using Vivado/Vitis
@@ -53,7 +63,8 @@ Ritchie, Thompson, Knuth, Lattner, Stallman, Torvalds and Hotz to name a few.
 <p></p>
 * **University of Queensland (2022 - 2023)**
     - Developed a decentralised application for event ticketing
-    - Co-authoured a research article published by Springer in the book [Blockchain and Smart Contract Technologies for Innovative Applications](https://link.springer.com/chapter/10.1007/978-3-031-50028-2_7#auth-Ryan-Ward)
+    - Co-authoured a research article published by Springer in the book [Blockchain and Smart Contract Technologies for
+      Innovative Applications](https://link.springer.com/chapter/10.1007/978-3-031-50028-2_7#auth-Ryan-Ward)
     - Designed and implemented a proof of concept ticketing system, deployed on an Ethereum testnet
     - The application won the award "Best Blockchain Project" at the UQ Innovation Showcase in 2022
 <p></p>
@@ -61,31 +72,38 @@ Ritchie, Thompson, Knuth, Lattner, Stallman, Torvalds and Hotz to name a few.
     - Casual software development
 
 ## Skills
-- Languages: C, Python, VHDL, C++, RISC-V & AArch64 ASM, Matlab, Tcl, Zig, Verilog
-- Development Tools: Git, GDB, Vivado, Vitis, Yosys suite
-- Platforms & Frameworks: Yocto, Buildroot, Zephyr, FreeRTOS
-- Hardware: STM32 microcontrollers, Raspberry Pi Pico, ESP32, Lattice FPGAs (ECP5), Xilinx FPGAs (Zynq7000, Zynq Ultrascale), various RF integrated circuits
+- Languages: C, Rust, Python, VHDL, C++, RISC-V & AArch64 assembly, Matlab, Tcl, Zig, Verilog
+- Development Tools: Git, GDB, Clippy, Vivado, Vitis, Yosys suite
+- Platforms & Frameworks: Tokio, ZMQ, Yocto, Buildroot, Zephyr, FreeRTOS
+- Hardware: STM32 microcontrollers, Raspberry Pi Pico, ESP32, Lattice FPGAs (ECP5), Nvidia Jetson Orin NX,
+  Xilinx FPGAs (Zynq7000, Zynq Ultrascale), various RF integrated circuits
 - Test equipment: Oscilloscopes, Vector Network Analysers, Spectrum Analysers, Frequency Counters, PassMark
 - Protocols: SPI, IIC, I2S, USB (2 & 3), USB-PD, DDR
 
 ## Education
-I hold a Bachelor's (Honours) and Master's degree of Electrical and Computer Engineering from the University of Queensland, Australia.
+I hold a Bachelor's (Honours) and Master's degree of Electrical and Computer Engineering from the
+University of Queensland, Australia.
 
 ## Projects
 **Zip RTOS**
-: In an effort to keep up with the times, I wanted to learn the [Zig](https://ziglang.org/) programming language in a freestanding context.
-What better way than to try and write a simple baremetal RTOS? The project is hosted [on GitHub](https://github.com/rwardd/zip), and still needs a lot of work.
-: So far, I have written a super basic task scheduler that will round-robin schedule an arbitrary number of tasks. I have spent most of my time understanding the
-RISC-V architecture and how different operating systems implement their context switching mechanisms rather than actually writing and learning Zig :D
+: In an effort to keep up with the times, I wanted to learn the [Zig](https://ziglang.org/) programming language in a
+freestanding context.
+What better way than to try and write a simple baremetal RTOS? The project is hosted
+[on GitHub](https://github.com/rwardd/zip), and still needs a lot of work.
+: So far, I have written a super basic task scheduler that will round-robin schedule an arbitrary number of tasks.
+I have spent most of my time understanding the RISC-V architecture and how different operating systems implement their
+context switching mechanisms rather than actually writing and learning Zig :D
 
 **Pico Mesh**
 : A LoRa based mesh network that allows Raspberry Pi Pico modules to communicate with one another.
 Built on top of Zephyr RTOS, running on the RP2040 with a Semtech SX1276 LoRa module and a ST7789 OLED display.
 
 ## Open Source Contributions
-I have contributed code to the FreeRTOS-Kernel and STM32 USB-PD Core repositories. 
-I would love to fill this section out more as my skills progress.
+I have contributed code to a few OSS repositories, notable ones being Rust's Clippy linting tool,
+the FreeRTOS-Kernel, and the STM32 USB-PD Core driver.
+I would love to fill this section out more in my spare time.
 
 ## Shout-out
-Huge thanks to [Oskar Wickström](https://x.com/owickstrom) for their [article](https://owickstrom.github.io/the-monospace-web/) and template of which this website is built from.
+Huge thanks to [Oskar Wickström](https://x.com/owickstrom) for their
+[article](https://owickstrom.github.io/the-monospace-web/) and template of which this website is built from.
 The source code for this website, and my blog, can be found on [my GitHub](https://github.com/rwardd/rwardd.github.io).

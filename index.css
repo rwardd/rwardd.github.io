@@ -4,10 +4,10 @@
   --font-family: "Fira Code", monospace;
   --line-height: 1.20rem;
   --border-thickness: 2px;
-  --text-color: #000;
-  --text-color-alt: #666;
-  --background-color: #fff;
-  --background-color-alt: #eee;
+  --text-color: #d5c09e;
+  --text-color-alt: #171819;
+  --background-color: #171819;
+  --background-color-alt: #d5c09e;
 
   --font-weight-normal: 400;
   --font-weight-medium: 550;
@@ -23,10 +23,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-color: #fff;
-    --text-color-alt: #aaa;
-    --background-color: #000;
-    --background-color-alt: #111;
+    --text-color: #d5c09e;
+    --text-color-alt: #171819;
+    --background-color: #171819;
+    --background-color-alt: #d5c09e;
   }
 }
 

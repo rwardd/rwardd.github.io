@@ -16,7 +16,7 @@
       <span class="subtitle">Embedded Software Engineer</span>
     </td>
     <th>Version</th>
-    <td class="width-min">v1.0.0</td>
+    <td class="width-min">v2.0.0</td>
   </tr>
   <tr>
     <th>Location</th>
@@ -43,12 +43,12 @@ id="toc-open-source-contributions">Open Source Contributions</a></li>
 </ul>
 </nav>
 <h2 id="about-me">About Me</h2>
-<p>I am a 23 year old software/electronics/computer engineer. I have a
+<p>I am a passionate software/electronics/computer engineer. I have a
 formal education in electrical and computer engineering, however, most
 of my professional experience has consisted of writing firmware,
 software and gateware for a variety of applications. I am passionate
-about embedded programming, electronics, and wherever software interacts
-with hardware.</p>
+about distributed systems, embedded programming, electronics, and
+wherever software interacts with hardware.</p>
 <p>In addition to writing software, I have been involved with a lot of
 hardware verification and testing, including bringing up new PCBs,
 porting firmware drivers to new platforms and architectures, and
@@ -72,14 +72,28 @@ Lattner, Stallman, Torvalds and Hotz to name a few.</p>
 <ul class="incremental">
 <li><strong>Praetorian Aeronautics (2025 - current)</strong>
 <ul class="incremental">
+<li>Architecting and implementing a distributed command &amp; control
+system for autonomous effectors</li>
+<li>Designing a onboard cross-language C2 layer connecting advanced
+computer vision algorithms to flight controller firmware</li>
+<li>Developing a sub-millisecond operator “action-to-launch”
+pipeline</li>
+<li>Utilising asynchronous Rust and NixOS</li>
 <li>Hardware integration of many avionics and sensor components</li>
-<li>Flight controller commissioning and configuration</li>
-<li>Building a secure and robust command and control system</li>
+<li>Debugging flight controller firmware on an STM32 platform</li>
 <li>Developed a multi-agent reinforcement learning simulation animation
 frontend</li>
-<li>Setting up company-wide development infrastructure
+<li>Configuring and maintaining company-wide development infrastructure
+including:
+<ul class="incremental">
+<li>Gitlab server</li>
+<li>CI/CD Runners</li>
+<li>Internal documentation (mdbook)</li>
+<li>Cloudflare WARP routing</li>
+<li>Other internal tooling
 <p>
 </p></li>
+</ul></li>
 </ul></li>
 <li><strong>Boeing Defence Australia (2023 - 2025)</strong>
 <ul class="incremental">
@@ -90,7 +104,7 @@ internal customers</li>
 Buildroot</li>
 <li>Collaborated with teams of engineers across domains to deliver
 projects on schedule</li>
-<li>Debugging firmware (GDB is awesome)</li>
+<li>Debugging firmware and hardware</li>
 <li>PCBA/CCA verification</li>
 <li>Custom IP core development in VHDL</li>
 <li>HDL development targeting the Zynq7000 SoC using Vivado/Vitis</li>
@@ -120,13 +134,14 @@ Innovation Showcase in 2022
 </ul>
 <h2 id="skills">Skills</h2>
 <ul class="incremental">
-<li>Languages: C, Python, VHDL, C++, RISC-V &amp; AArch64 ASM, Matlab,
-Tcl, Zig, Verilog</li>
-<li>Development Tools: Git, GDB, Vivado, Vitis, Yosys suite</li>
-<li>Platforms &amp; Frameworks: Yocto, Buildroot, Zephyr, FreeRTOS</li>
+<li>Languages: C, Rust, Python, VHDL, C++, RISC-V &amp; AArch64
+assembly, Matlab, Tcl, Zig, Verilog</li>
+<li>Development Tools: Git, GDB, Clippy, Vivado, Vitis, Yosys suite</li>
+<li>Platforms &amp; Frameworks: Tokio, ZMQ, Yocto, Buildroot, Zephyr,
+FreeRTOS</li>
 <li>Hardware: STM32 microcontrollers, Raspberry Pi Pico, ESP32, Lattice
-FPGAs (ECP5), Xilinx FPGAs (Zynq7000, Zynq Ultrascale), various RF
-integrated circuits</li>
+FPGAs (ECP5), Nvidia Jetson Orin NX, Xilinx FPGAs (Zynq7000, Zynq
+Ultrascale), various RF integrated circuits</li>
 <li>Test equipment: Oscilloscopes, Vector Network Analysers, Spectrum
 Analysers, Frequency Counters, PassMark</li>
 <li>Protocols: SPI, IIC, I2S, USB (2 &amp; 3), USB-PD, DDR</li>
@@ -160,9 +175,10 @@ the RP2040 with a Semtech SX1276 LoRa module and a ST7789 OLED display.
 </dd>
 </dl>
 <h2 id="open-source-contributions">Open Source Contributions</h2>
-<p>I have contributed code to the FreeRTOS-Kernel and STM32 USB-PD Core
-repositories. I would love to fill this section out more as my skills
-progress.</p>
+<p>I have contributed code to a few OSS repositories, notable ones being
+Rust’s Clippy linting tool, the FreeRTOS-Kernel, and the STM32 USB-PD
+Core driver. I would love to fill this section out more in my spare
+time.</p>
 <h2 id="shout-out">Shout-out</h2>
 <p>Huge thanks to <a href="https://x.com/owickstrom">Oskar Wickström</a>
 for their <a
