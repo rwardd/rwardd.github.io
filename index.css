@@ -4,10 +4,13 @@
   --font-family: "Fira Code", monospace;
   --line-height: 1.20rem;
   --border-thickness: 2px;
-  --text-color: #d5c09e;
-  --text-color-alt: #171819;
-  --background-color: #171819;
-  --background-color-alt: #d5c09e;
+  --text-color: #171819;
+  --text-color-alt: #d5c09e;
+  --background-color: #d5c09e;
+  --background-color-alt: #171819;
+
+  --verbatim-background-color: #91886c;
+  --verbatim-background-color-alt: #2d2a29;
 
   --font-weight-normal: 400;
   --font-weight-medium: 550;
@@ -27,6 +30,8 @@
     --text-color-alt: #171819;
     --background-color: #171819;
     --background-color-alt: #d5c09e;
+    --verbatim-background-color: #2d2a29;
+    --verbatim-background-color-alt: #91886c;
   }
 }
 
@@ -245,12 +250,12 @@ figure pre {
 
 pre, code {
   font-family: var(--font-family);
-  background: var(--background-color-alt);
+  background: var(--verbatim-background-color);
 }
 
 code {
   font-weight: var(--font-weight-normal);
-  color: var(--text-color-alt)
+  color: var(--verbatim-background-color-alt)
 }
 
 figure {
