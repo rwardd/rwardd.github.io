@@ -99,7 +99,7 @@ context switching mechanisms rather than actually writing and learning Zig :D
 Built on top of Zephyr RTOS, running on the RP2040 with a Semtech SX1276 LoRa module and a ST7789 OLED display.
 
 ## Open Source Contributions
-I have contributed code to a few OSS repositories, notable ones being Rust's Clippy linting tool,
+I have contributed to a few OSS projects, notable ones being the Rust compiler and their linting tool Clippy,
 the FreeRTOS-Kernel, and the STM32 USB-PD Core driver.
 I would love to fill this section out more in my spare time.
 
