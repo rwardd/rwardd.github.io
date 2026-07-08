@@ -4,7 +4,6 @@ subtitle: Embedded Software Engineer
 version: v2.0.0
 email: rwardd@outlook.com.au
 linkedin: https://www.linkedin.com/in/rwardd/
-resume: https://nbviewer.org/github/rwardd/rwardd.github.io/blob/main/resume.pdf
 github: https://github.com/rwardd
 blog: https://ryanward.tech/blog/blog.html
 ---
@@ -32,44 +31,11 @@ historical and influential figures in the computing world is something I enjoy, 
 Ritchie, Thompson, Knuth, Lattner, Stallman, Torvalds and Hotz to name a few.
 
 ## Experience
-* **Praetorian Aeronautics (2025 - current)**
-    - Architecting and implementing a distributed command & control system for autonomous effectors
-    - Designing a onboard cross-language C2 layer connecting advanced computer vision algorithms to flight controller
-      firmware
-    - Developing a sub-millisecond operator "action-to-launch" pipeline
-    - Utilising asynchronous Rust and NixOS
-    - Hardware integration of many avionics and sensor components
-    - Debugging flight controller firmware on an STM32 platform
-    - Developed a multi-agent reinforcement learning simulation animation frontend
-    - Configuring and maintaining company-wide development infrastructure including:
-        * Gitlab server
-        * CI/CD Runners
-        * Internal documentation (mdbook)
-        * Cloudflare WARP routing
-        * Other internal tooling
-<p></p>
+* **Anduril Industries (2026 - Present)**
+* **Praetorian Aeronautics (2025 - 2026)**
 * **Boeing Defence Australia (2023 - 2025)**
-    - Implemented firmware on STM32 targets on a FreeRTOS platform
-    - Wrote and integrated custom IC drivers, increasing usability for internal customers
-    - Embedded Linux development and configuration using Yocto and Buildroot
-    - Collaborated with teams of engineers across domains to deliver projects on schedule
-    - Debugging firmware and hardware
-    - PCBA/CCA verification
-    - Custom IP core development in VHDL
-    - HDL development targeting the Zynq7000 SoC using Vivado/Vitis
-    - Unit testbench development
-    - Debugging RF hardware and gateware
-    - C standard library testing
-<p></p>
 * **University of Queensland (2022 - 2023)**
-    - Developed a decentralised application for event ticketing
-    - Co-authoured a research article published by Springer in the book [Blockchain and Smart Contract Technologies for
-      Innovative Applications](https://link.springer.com/chapter/10.1007/978-3-031-50028-2_7#auth-Ryan-Ward)
-    - Designed and implemented a proof of concept ticketing system, deployed on an Ethereum testnet
-    - The application won the award "Best Blockchain Project" at the UQ Innovation Showcase in 2022
-<p></p>
 * **Various Startups (2021 - 2022)**
-    - Casual software development
 
 ## Skills
 - Languages: C, Rust, Python, VHDL, C++, RISC-V & AArch64 assembly, Matlab, Tcl, Zig, Verilog
